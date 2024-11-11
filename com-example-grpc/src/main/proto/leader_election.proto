@@ -1,0 +1,59 @@
+//Copyright (c) [2024] [Sachinandan Das Sen]
+//This file is part of [Implementation of Distributed Leader Election using gRPC], which is released under the MIT License.\
+//See LICENSE.md for details or visit https://opensource.org/licenses/MIT.
+
+syntax = "proto3";
+option java_package = "com.example.grpc";
+option java_outer_classname = "HelloWorldProto";
+
+// LeaderElection service for managing the election process
+service LeaderElection {
+  rpc startElection (ElectionRequest) returns (ElectionResponse);
+  rpc coordinator (CoordinatorRequest) returns (CoordinatorResponse);
+}
+
+// PeerRegistration service for nodes to register themselves
+service PeerRegistration {
+  rpc registerPeer (PeerRequest) returns (PeerResponse);
+  rpc getPeers (EmptyRequest) returns (PeerList);
+}
+
+message ElectionRequest {
+  int32 nodeId = 1;
+}
+
+message ElectionResponse {
+  int32 maxId = 1;
+  string status = 2;
+}
+
+message CoordinatorRequest {
+  int32 leaderId = 1;
+}
+
+message CoordinatorResponse {
+  string status = 1;
+}
+
+// Peer registration messages
+message PeerRequest {
+  int32 nodeId = 1;
+  string address = 2;
+  int32 port = 3;
+}
+
+message PeerResponse {
+  string status = 1;
+}
+
+message EmptyRequest {}
+
+message Peer {
+  int32 nodeId = 1;
+  string address = 2;
+  int32 port = 3;
+}
+
+message PeerList {
+  repeated Peer peers = 1;
+}

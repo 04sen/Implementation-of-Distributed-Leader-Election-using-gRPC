@@ -128,7 +128,7 @@ Sachinandan Das Sen
 
 ## Version History
 
-- Initial Release: October 26, 2022
+- Initial Release: October 26, 2024
 
 ## Acknowledgments
 
